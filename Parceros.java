@@ -26,21 +26,19 @@ public class Parceros extends JFrame {
         numberField.setBounds(120, 50, 150, 25);
         numberField.addKeyListener(new KeyAdapter() {
             private Color originalColor = numberField.getForeground();
-            private boolean showingError = false; // Para evitar que el mensaje se quede
+            private boolean showingError = false;
         
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
         
-                // Permitir borrar con Backspace o Delete
                 if (c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
                     return;
                 }
-        
-                // Si no es un número, mostrar advertencia
+
                 if (!Character.isDigit(c)) {
                     e.consume();
-                    if (!showingError) { // Evita que se repita el mensaje al teclear varias veces
+                    if (!showingError) {
                         numberField.setForeground(Color.LIGHT_GRAY);
                         numberField.setText("Ingrese un número válido");
                         showingError = true;
@@ -58,7 +56,6 @@ public class Parceros extends JFrame {
         
             @Override
             public void keyReleased(KeyEvent e) {
-                // Si el campo está vacío después de borrar, restablecer color
                 if (numberField.getText().isEmpty()) {
                     numberField.setForeground(originalColor);
                     showingError = false;
